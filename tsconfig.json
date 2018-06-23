@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "amd",
+        "target": "es5",
+        "inlineSourceMap": true
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}

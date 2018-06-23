@@ -1,0 +1,53 @@
+define(["require", "exports", "./number-font", "./content"], function (require, exports, number_font_1, content_1) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var Tetris = /** @class */ (function () {
+        function Tetris() {
+            var content = content_1.Content.GetInstance();
+            this.back = content.get("back");
+            var num = content.get("numbers");
+            this.font = {
+                gray: new number_font_1.NumberFont(num, 0, 9),
+                cyan: new number_font_1.NumberFont(num, 9, 9),
+                red: new number_font_1.NumberFont(num, 18, 9),
+                blue: new number_font_1.NumberFont(num, 27, 9),
+                orange: new number_font_1.NumberFont(num, 36, 9),
+                green: new number_font_1.NumberFont(num, 45, 9),
+                yellow: new number_font_1.NumberFont(num, 54, 9),
+                purple: new number_font_1.NumberFont(num, 63, 9)
+            };
+            this.data = {
+                L: 0,
+                I: 0,
+                T: 0,
+                S: 0,
+                Z: 0,
+                O: 0,
+                J: 0,
+                TOTAL: 0
+            };
+        }
+        Tetris.prototype.handleInputs = function (input) {
+            return this;
+        };
+        Tetris.prototype.update = function () {
+            return this;
+        };
+        Tetris.prototype.draw = function (ctx) {
+            ctx.drawImage(this.back, 0, 0);
+            this.font.gray.draw(ctx, 42, 10, 10, 8);
+            this.font.orange.draw(ctx, this.data.TOTAL, 432, 52, 5);
+            this.font.cyan.draw(ctx, this.data.TOTAL, 432, 76, 5);
+            this.font.purple.draw(ctx, this.data.TOTAL, 432, 100, 5);
+            this.font.green.draw(ctx, this.data.TOTAL, 432, 124, 5);
+            this.font.red.draw(ctx, this.data.TOTAL, 432, 148, 5);
+            this.font.yellow.draw(ctx, this.data.TOTAL, 432, 172, 5);
+            this.font.blue.draw(ctx, this.data.TOTAL, 432, 196, 5);
+            this.font.gray.draw(ctx, this.data.TOTAL, 425, 221, 6);
+            return this;
+        };
+        return Tetris;
+    }());
+    exports.Tetris = Tetris;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV0cmlzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV0cmlzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztJQUdBO1FBTUk7WUFDSSxJQUFJLE9BQU8sR0FBRyxpQkFBTyxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQ3BDLElBQUksQ0FBQyxJQUFJLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUNoQyxJQUFJLEdBQUcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ2pDLElBQUksQ0FBQyxJQUFJLEdBQUc7Z0JBQ1IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztnQkFDL0IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztnQkFDL0IsR0FBRyxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDL0IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDaEMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDbEMsS0FBSyxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDakMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDbEMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQzthQUNyQyxDQUFBO1lBQ0QsSUFBSSxDQUFDLElBQUksR0FBRztnQkFDUixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixLQUFLLEVBQUUsQ0FBQzthQUNYLENBQUE7UUFDTCxDQUFDO1FBRUQsNkJBQVksR0FBWixVQUFhLEtBQUs7WUFFZCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO1FBRUQsdUJBQU0sR0FBTjtZQUNJLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7UUFFRCxxQkFBSSxHQUFKLFVBQUssR0FBNkI7WUFDOUIsR0FBRyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUMvQixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBRXhDLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsR0FBRyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUN4RCxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLEdBQUcsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDdEQsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUN4RCxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDdEQsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUV2RCxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDdkQsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUNMLGFBQUM7SUFBRCxDQUFDLEFBeERELElBd0RDO0lBeERZLHdCQUFNIn0=
