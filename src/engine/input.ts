@@ -6,25 +6,28 @@ var _instance: Input,
     _down = {},
     _released = [];
 
+export const KEYS = {
+    SPACE: 32,
+    LEFT_ARROW: 37,
+    UP_ARROW: 38,
+    RIGHT_ARROW: 39,
+    DOWN_ARROW: 40,
+    A: "A".charCodeAt(0),
+    W: "W".charCodeAt(0),
+    D: "D".charCodeAt(0),
+    S: "S".charCodeAt(0)
+}
+
+export const BUTTONS = {
+    LEFT: -1,
+    MIDDLE: -2,
+    RIGHT: -3
+}
+
 export class Input {
-    Buttons = {
-        LEFT: -1,
-        MIDDLE: -2,
-        RIGHT: -3
-    }
-    Keys = {
-        SPACE: 32,
-        LEFT_ARROW: 37,
-        UP_ARROW: 38,
-        RIGHT_ARROW: 39,
-        DOWN_ARROW: 40
-    }
     mouse = { x: 0, y: 0 }
 
     constructor() {
-        for (let char = 65; char <= 90; char++) {
-            this.Keys[String.fromCharCode(char)] = char;
-        }
         let canvas = Canvas.GetInstance();
         
         canvas.frame.onmousedown = this.onDown.bind(this);
@@ -56,16 +59,16 @@ export class Input {
         if (action) {
             _pressed[action] = !_down[action];
             _down[action] = true;
+            event.preventDefault();
         }
-        event.preventDefault();
     }
 
     onUp(event) {
         let action = this.getAction(event);
         if (action) {
             _released.push(action);
+            event.preventDefault();
         }
-        event.preventDefault();
     }
 
     onMove({ target: el, clientX, clientY }) {
@@ -83,7 +86,7 @@ export class Input {
     }
 
     onContext(event) {
-        if (_bindings[this.Buttons.RIGHT]) {
+        if (_bindings[BUTTONS.RIGHT]) {
             event.preventDefault();
         }
     }

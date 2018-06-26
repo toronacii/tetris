@@ -1,5 +1,6 @@
-import { Canvas, Content, Tetris, Input } from './engine/index';
+import { Canvas, Content, Tetris } from './engine/index';
 import { Game } from './game';
+import { Input, KEYS } from './engine/input';
 
 let canvas = new Canvas();
 let content = new Content();
@@ -21,11 +22,11 @@ class App extends Game {
         content.load("blocks", "assets/images/blocks.png");
         content.load("numbers", "assets/images/numbers.png");
 
-        input.bindKey("space", input.Keys.SPACE);
-        input.bindKey("left", [input.Keys.LEFT_ARROW, input.Keys["A"]]);
-        input.bindKey("up", [input.Keys.UP_ARROW, input.Keys["W"]]);
-        input.bindKey("right", [input.Keys.RIGHT_ARROW, input.Keys["D"]]);
-        input.bindKey("down", [input.Keys.DOWN_ARROW, input.Keys["S"]]);
+        input.bindKey("space", KEYS.SPACE);
+        input.bindKey("left", [KEYS.LEFT_ARROW, KEYS.A]);
+        input.bindKey("up", [KEYS.UP_ARROW, KEYS.W]);
+        input.bindKey("right", [KEYS.RIGHT_ARROW, KEYS.D]);
+        input.bindKey("down", [KEYS.DOWN_ARROW, KEYS.S]);
     }
 
     tick() {
