@@ -1,4 +1,5 @@
 import { Canvas } from "./engine/index";
+import { Input } from './engine/input';
 
 var _reqFrame: number, _isRunning: boolean;
 
@@ -31,6 +32,7 @@ export class Game {
     private _loop() {
         _reqFrame = window.requestAnimationFrame(this._loop);
         this.tick();
+        Input.GetInstance().clearPressed();
         Canvas.GetInstance().flip();
     }
 }

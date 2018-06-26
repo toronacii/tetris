@@ -1,8 +1,9 @@
-import { Canvas, Content, Tetris } from './engine/index';
+import { Canvas, Content, Tetris, Input } from './engine/index';
 import { Game } from './game';
 
 let canvas = new Canvas();
 let content = new Content();
+let input = new Input();
 
 class App extends Game {
 
@@ -19,13 +20,18 @@ class App extends Game {
         content.load("back", "assets/images/back.png");
         content.load("blocks", "assets/images/blocks.png");
         content.load("numbers", "assets/images/numbers.png");
+
+        input.bindKey("space", input.Keys.SPACE);
+        input.bindKey("left", [input.Keys.LEFT_ARROW, input.Keys["A"]]);
+        input.bindKey("up", [input.Keys.UP_ARROW, input.Keys["W"]]);
+        input.bindKey("right", [input.Keys.RIGHT_ARROW, input.Keys["D"]]);
+        input.bindKey("down", [input.Keys.DOWN_ARROW, input.Keys["S"]]);
     }
 
     tick() {
         if (this.hasLoad) {
             this.tetris
-                .handleInputs({})
-                .update()
+                .update(input)
                 .draw(canvas.ctx);
         } else {
             this.hasLoad = content.progress() === 1;

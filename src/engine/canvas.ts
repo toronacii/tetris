@@ -1,4 +1,4 @@
-var _fw, _fh, _vw, _vh, _scale, _instance;
+var _fw, _fh, _vw, _vh, _scale, _instance: Canvas;
 
 export class Canvas {
     frame: HTMLCanvasElement;

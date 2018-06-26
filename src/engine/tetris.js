@@ -1,53 +1,23 @@
-define(["require", "exports", "./number-font", "./content"], function (require, exports, number_font_1, content_1) {
+define(["require", "exports", "./gameboard", "./state-manager"], function (require, exports, gameboard_1, state_manager_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var Tetris = /** @class */ (function () {
         function Tetris() {
-            var content = content_1.Content.GetInstance();
-            this.back = content.get("back");
-            var num = content.get("numbers");
-            this.font = {
-                gray: new number_font_1.NumberFont(num, 0, 9),
-                cyan: new number_font_1.NumberFont(num, 9, 9),
-                red: new number_font_1.NumberFont(num, 18, 9),
-                blue: new number_font_1.NumberFont(num, 27, 9),
-                orange: new number_font_1.NumberFont(num, 36, 9),
-                green: new number_font_1.NumberFont(num, 45, 9),
-                yellow: new number_font_1.NumberFont(num, 54, 9),
-                purple: new number_font_1.NumberFont(num, 63, 9)
-            };
-            this.data = {
-                L: 0,
-                I: 0,
-                T: 0,
-                S: 0,
-                Z: 0,
-                O: 0,
-                J: 0,
-                TOTAL: 8000
-            };
+            this.gameBoard = new gameboard_1.GameBoard();
+            this.state = new state_manager_1.StateManager();
         }
-        Tetris.prototype.handleInputs = function (input) {
-            return this;
-        };
-        Tetris.prototype.update = function () {
+        Tetris.prototype.update = function (input) {
+            if (input.pressed("space")) {
+                console.log("space is nice");
+            }
             return this;
         };
         Tetris.prototype.draw = function (ctx) {
-            ctx.drawImage(this.back, 0, 0);
-            this.font.gray.draw(ctx, 0, 10, 10, 8);
-            this.font.orange.draw(ctx, this.data.L, 432, 52, 5);
-            this.font.cyan.draw(ctx, this.data.I, 432, 76, 5);
-            this.font.purple.draw(ctx, this.data.T, 432, 100, 5);
-            this.font.green.draw(ctx, this.data.S, 432, 124, 5);
-            this.font.red.draw(ctx, this.data.Z, 432, 148, 5);
-            this.font.yellow.draw(ctx, this.data.O, 432, 172, 5);
-            this.font.blue.draw(ctx, this.data.J, 432, 196, 5);
-            this.font.gray.draw(ctx, this.data.TOTAL, 425, 221, 6);
+            this.gameBoard.draw(ctx, this.state);
             return this;
         };
         return Tetris;
     }());
     exports.Tetris = Tetris;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV0cmlzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV0cmlzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztJQUdBO1FBTUk7WUFDSSxJQUFJLE9BQU8sR0FBRyxpQkFBTyxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQ3BDLElBQUksQ0FBQyxJQUFJLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUNoQyxJQUFJLEdBQUcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1lBQ2pDLElBQUksQ0FBQyxJQUFJLEdBQUc7Z0JBQ1IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztnQkFDL0IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQztnQkFDL0IsR0FBRyxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDL0IsSUFBSSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDaEMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDbEMsS0FBSyxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDakMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQztnQkFDbEMsTUFBTSxFQUFFLElBQUksd0JBQVUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQzthQUNyQyxDQUFBO1lBQ0QsSUFBSSxDQUFDLElBQUksR0FBRztnQkFDUixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixDQUFDLEVBQUUsQ0FBQztnQkFDSixLQUFLLEVBQUUsSUFBSTthQUNkLENBQUE7UUFDTCxDQUFDO1FBRUQsNkJBQVksR0FBWixVQUFhLEtBQUs7WUFFZCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO1FBRUQsdUJBQU0sR0FBTjtZQUNJLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7UUFFRCxxQkFBSSxHQUFKLFVBQUssR0FBNkI7WUFDOUIsR0FBRyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUMvQixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBRXZDLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQUUsR0FBRyxFQUFFLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNwRCxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUFFLEdBQUcsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDbEQsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ3JELElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUNwRCxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDbEQsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO1lBQ3JELElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztZQUVuRCxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDdkQsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUNMLGFBQUM7SUFBRCxDQUFDLEFBeERELElBd0RDO0lBeERZLHdCQUFNIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV0cmlzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV0cmlzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztJQUlBO1FBS0k7WUFDSSxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUkscUJBQVMsRUFBRSxDQUFDO1lBQ2pDLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSw0QkFBWSxFQUFFLENBQUM7UUFDcEMsQ0FBQztRQUVELHVCQUFNLEdBQU4sVUFBTyxLQUFZO1lBQ2YsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO2dCQUN4QixPQUFPLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFBO2FBQy9CO1lBQ0QsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUVELHFCQUFJLEdBQUosVUFBSyxHQUE2QjtZQUM5QixJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ3JDLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7UUFDTCxhQUFDO0lBQUQsQ0FBQyxBQXJCRCxJQXFCQztJQXJCWSx3QkFBTSJ9
