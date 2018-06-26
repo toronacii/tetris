@@ -43,7 +43,7 @@ export class Input {
 
     }
 
-    bindKey(action, keys: number | any[]) {
+    bindKey(action, keys: number | number[]) {
         if (typeof keys === "number") {
             _bindings[keys] = action;
             return;
