@@ -1,3 +1,4 @@
+import { Block } from './block';
 import { Content } from "./index";
 import { NumberFont } from "./number-font";
 
@@ -23,7 +24,7 @@ export class GameBoard {
         }
     }
 
-    draw(ctx, { tetraminos }) {
+    draw(ctx: CanvasRenderingContext2D, { tetraminos }) {
         ctx.drawImage(this.back, 0, 0);
         this.font.gray.draw(ctx, 0, 10, 10, 8);
 
@@ -36,5 +37,15 @@ export class GameBoard {
         this.font.blue.draw(ctx, tetraminos.J, 432, 196, 5);
 
         this.font.gray.draw(ctx, tetraminos.TOTAL, 425, 221, 6);
+    }
+
+    drawBlock(ctx: CanvasRenderingContext2D, block: Block, x, y) {
+        let id = block.ID,
+            size = 13;
+
+        x = 180 + x * (size - 1);
+        y = 4 + y * (size - 1);
+
+        ctx.drawImage(this.blocks, id * (size - 1), 0, size, size, x, y, size, size)
     }
 }

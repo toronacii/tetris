@@ -1,1 +1,105 @@
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV0cmFtaW5vLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV0cmFtaW5vLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiIifQ==
+define(["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var ShapeDefinition = {
+        L: ["001", "111", "000"].join(""),
+        I: ["0000", "1111", "0000", "0000"].join(""),
+        T: ["010", "111", "000"].join(""),
+        S: ["011", "110", "000"].join(""),
+        Z: ["110", "011", "000"].join(""),
+        O: ["011", "011", "000"].join(""),
+        J: ["100", "111", "000"].join("")
+    };
+    var Tetramino = /** @class */ (function () {
+        function Tetramino(id, x, y) {
+            if (x === void 0) { x = 0; }
+            if (y === void 0) { y = 0; }
+            this.x = x;
+            this.y = y;
+            this._shapes = [];
+            this.rotation = 0;
+            this.ID = id.toUpperCase();
+            var shape = ShapeDefinition[this.ID];
+            var s = [], n = Math.sqrt(shape.length);
+            for (var i = 0; i < n; i++) {
+                s[i] = [];
+                for (var j = 0; j < n; j++) {
+                    s[i][j] = parseInt(shape[j + i * n]);
+                }
+            }
+            this._shapes.push(s);
+            var r = 3, t;
+            while (this.ID !== "O" && r-- !== 0) {
+                t = [];
+                for (var i = 0; i < n; i++) {
+                    t[i] = [];
+                    for (var j = 0; j < n; j++) {
+                        t[i][j] = s[n - j - 1][i];
+                    }
+                }
+                s = t.slice(0);
+                this._shapes.push(s);
+            }
+        }
+        Tetramino.prototype.setTo = function (control, id) {
+            var _this = this;
+            if (id === void 0) { id = this.ID; }
+            var shape = this._shapes[this.rotation];
+            shape.forEach(function (_, i) { return _.forEach(function (__, j) {
+                if (shape[j][i]) {
+                    control[_this.x + i][_this.y + j].setType(id);
+                }
+            }); });
+        };
+        Tetramino.prototype.check = function (control, dx, dy, dr) {
+            if (dx === void 0) { dx = 0; }
+            if (dy === void 0) { dy = 0; }
+            if (dr === void 0) { dr = null; }
+            dr = dr ? this.getRotation(dr) : this.rotation;
+            var x = this.x + dx, y = this.y + dy, w = control.length, h = control[0].length, shape = this._shapes[dr];
+            shape.forEach(function (_, i) { return _.forEach(function (__, j) {
+                if (shape[j][i]) {
+                    if (!(0 <= x + i && x + i < w && 0 <= y + j && y + j < h) ||
+                        control[x + i][y + j].solid) {
+                        return false;
+                    }
+                }
+            }); });
+            return true;
+        };
+        Tetramino.prototype.toString = function () {
+            var str = "";
+            for (var i = 0; i < this._shapes.length; i++) {
+                str += "\n";
+                var _shape = this._shapes[i];
+                for (var j = 0; j < _shape.length; j++) {
+                    for (var k = 0; k < _shape[j].length; k++) {
+                        str += _shape[j][k] ? "#" : ".";
+                    }
+                    str += "\n";
+                }
+            }
+            return str;
+        };
+        Tetramino.prototype.getRotation = function (dr) {
+            var r = this.rotation;
+            if (dr > 0) {
+                return (r + 1) % this._shapes.length;
+            }
+            return r - 1 >= 0 ? r - 1 : this._shapes.length - 1;
+        };
+        return Tetramino;
+    }());
+    exports.Tetramino = Tetramino;
+    var TetraminoType;
+    (function (TetraminoType) {
+        TetraminoType["L"] = "L";
+        TetraminoType["I"] = "I";
+        TetraminoType["T"] = "L";
+        TetraminoType["S"] = "S";
+        TetraminoType["Z"] = "Z";
+        TetraminoType["O"] = "O";
+        TetraminoType["J"] = "J";
+    })(TetraminoType = exports.TetraminoType || (exports.TetraminoType = {}));
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGV0cmFtaW5vLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGV0cmFtaW5vLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztJQUFBLElBQU0sZUFBZSxHQUFHO1FBQ3BCLENBQUMsRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQztRQUNqQyxDQUFDLEVBQUUsQ0FBQyxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxNQUFNLENBQUMsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDO1FBQzVDLENBQUMsRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQztRQUNqQyxDQUFDLEVBQUUsQ0FBQyxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssQ0FBQyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUM7UUFDakMsQ0FBQyxFQUFFLENBQUMsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLENBQUMsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDO1FBQ2pDLENBQUMsRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQztRQUNqQyxDQUFDLEVBQUUsQ0FBQyxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssQ0FBQyxDQUFDLElBQUksQ0FBQyxFQUFFLENBQUM7S0FDcEMsQ0FBQTtJQUVEO1FBS0ksbUJBQVksRUFBVSxFQUFTLENBQWEsRUFBUyxDQUFhO1lBQW5DLGtCQUFBLEVBQUEsS0FBYTtZQUFTLGtCQUFBLEVBQUEsS0FBYTtZQUFuQyxNQUFDLEdBQUQsQ0FBQyxDQUFZO1lBQVMsTUFBQyxHQUFELENBQUMsQ0FBWTtZQUoxRCxZQUFPLEdBQWUsRUFBRSxDQUFDO1lBQ2pDLGFBQVEsR0FBRyxDQUFDLENBQUM7WUFJVCxJQUFJLENBQUMsRUFBRSxHQUFHLEVBQUUsQ0FBQyxX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
