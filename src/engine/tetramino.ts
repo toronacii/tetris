@@ -43,12 +43,14 @@ export class Tetramino {
 
     setTo(control: any[][], id: string | number = this.ID) {
         let shape = this._shapes[this.rotation];
-        
-        shape.forEach((_, i) => _.forEach((__, j) => {
-            if (shape[j][i]) {
-                control[this.x + i][this.y + j].setType(id);
+
+        for (let i = 0; i < shape.length; i++) {
+            for (let j = 0; j < shape.length; j++) {
+                if (shape[j][i]) { 
+                    control[this.x + i][this.y + j].setType(id)
+                }
             }
-        }))
+        }
     }
 
     check(control: any[][], dx = 0, dy = 0, dr = null) {
@@ -60,15 +62,17 @@ export class Tetramino {
             h = control[0].length,
             shape = this._shapes[dr];
 
-        shape.forEach((_, i) => _.forEach((__, j) => {
-            if (shape[j][i]) {
-                if (!(0 <= x + i && x + i < w && 0 <= y + j && y + j < h) ||
-                    control[x + i][y + j].solid
-                ) {
-                    return false
+        for (let i = 0; i < shape.length; i++) {
+            for (let j = 0; j < shape.length; j++) {
+                if (shape[j][i]) { 
+                    if (!(0 <= x + i && x + i < w && 0 <= y + j && y + j < h) ||
+                        control[x + i][y + j].solid
+                    ) {
+                        return false
+                    }
                 }
             }
-        }));
+        }
 
         return true;
     }
