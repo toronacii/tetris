@@ -92,6 +92,10 @@ export class Tetramino {
         return str;
     }
 
+    setRotation(dr) {
+        this.rotation = this.getRotation(dr);
+    }
+
     private getRotation(dr) {
         let r = this.rotation;
 

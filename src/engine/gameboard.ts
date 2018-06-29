@@ -1,6 +1,7 @@
 import { Block } from './block';
 import { Content } from "./index";
 import { NumberFont } from "./number-font";
+import { StateManager } from './state-manager';
 
 export class GameBoard {
     private back;
@@ -24,9 +25,13 @@ export class GameBoard {
         }
     }
 
-    draw(ctx: CanvasRenderingContext2D, { tetraminos }) {
+    draw(ctx: CanvasRenderingContext2D, { tetraminos, level, lines, score } : StateManager) {
         ctx.drawImage(this.back, 0, 0);
         this.font.gray.draw(ctx, 0, 10, 10, 8);
+
+        this.font.gray.draw(ctx, level, 113, 16, 5);
+        this.font.gray.draw(ctx, lines, 113, 34, 5);
+        this.font.gray.draw(ctx, score, 78, 52, 10);
 
         this.font.orange.draw(ctx, tetraminos.L, 432, 52, 5);
         this.font.cyan.draw(ctx, tetraminos.I, 432, 76, 5);
